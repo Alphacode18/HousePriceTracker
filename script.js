@@ -1,15 +1,16 @@
+require('dotenv').config();
+
 const puppeteer = require('puppeteer');
 const nodemailer = require('nodemailer');
 
 async function sendMail() {
-    let account = await nodemailer.createTestAccount();
     let transporter = nodemailer.createTransport({
-      host: "smtp.ethereal.email",
+      host: "smtp.gmail.email",
       port: 587,
       secure: false,
       auth: {
-        user: account.user,
-        pass: account.pass
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD
       }
     });
     let info = await transporter.sendMail({
