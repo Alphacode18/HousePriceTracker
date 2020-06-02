@@ -7,19 +7,21 @@ async function sendMail() {
     let transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.EMAIL,
+        user: process.env.FROM_EMAIL,
         pass: process.env.PASSWORD
       }
     });
     let info = await transporter.sendMail({
-      from: '"HousePriceTracker" <skkhary@gmail.com>',
-      to: "skkhary@gmail.com",
+      from: '"HousePriceTracker" <auto@HousePriceTracker.com>',
+      to: process.env.TO_EMAIL,
       subject: "HousePriceTracker Desired Price Obtained",
       text: "The desired price of the property has been reached.",
       html: '<h3>The desired price of the property has been reached.</h3>',
     });
     console.log("Message sent: %s", info.messageId);
 }
+
+sendMail();
 
 let url;
 
