@@ -5,9 +5,7 @@ const nodemailer = require('nodemailer');
 
 async function sendMail() {
     let transporter = nodemailer.createTransport({
-      host: "smtp.gmail.email",
-      port: 587,
-      secure: false,
+      service: "gmail",
       auth: {
         user: process.env.EMAIL,
         pass: process.env.PASSWORD
@@ -21,7 +19,6 @@ async function sendMail() {
       html: '<h3>The desired price of the property has been reached.</h3>',
     });
     console.log("Message sent: %s", info.messageId);
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 }
 
 let url;
