@@ -1,6 +1,28 @@
 const puppeteer = require('puppeteer');
 const nodemailer = require('nodemailer');
 
+async function sendMail() {
+    let account = await nodemailer.createTestAccount();
+    let transporter = nodemailer.createTransport({
+      host: "smtp.ethereal.email",
+      port: 587,
+      secure: false,
+      auth: {
+        user: account.user,
+        pass: account.pass
+      }
+    });
+    let info = await transporter.sendMail({
+      from: '"HousePriceTracker" <skkhary@gmail.com>',
+      to: "skkhary@gmail.com",
+      subject: "HousePriceTracker Desired Price Obtained",
+      text: "The desired price of the property has been reached.",
+      html: '<h3>The desired price of the property has been reached.</h3>',
+    });
+    console.log("Message sent: %s", info.messageId);
+    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+}
+
 let url;
 
 async function scrapePrice(url) {
