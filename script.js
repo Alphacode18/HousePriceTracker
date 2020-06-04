@@ -37,7 +37,7 @@ async function scrapePrice(url) {
 async function priceTracker(url, desiredPrice) {
   let emailSent = false;
   let price = scrapePrice(url);
-  if (price >= price) {
+  if (desiredPrice >= price) {
     sendMail();
     emailSent = true;
     return emailSent;
@@ -45,7 +45,7 @@ async function priceTracker(url, desiredPrice) {
 }
 
 async function main() {
-  let sentValue = priceTracker('https://www.sothebysrealty.com/eng/sales/detail/180-l-1187-hnyp6r/249-south-westgate-avenue-los-angeles-ca-90049', 10000000);
+  let sentValue = priceTracker('https://www.sothebysrealty.com/eng/sales/detail/180-l-1187-hnyp6r/249-south-westgate-avenue-los-angeles-ca-90049', 9500000);
   setTimeout(() => {console.log("Fetching Data");}, 2000);
 }
 
